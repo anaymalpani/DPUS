@@ -87,9 +87,9 @@ y = df['prognosis']
 
 import os
 import csv
-with open('/home/shashank/Desktop/Predicting-Diseases-From-Symptoms-master/Manual-Data/Training.csv') as f:
+with open('Manual-Data/Training.csv') as f:
     reader = csv.reader(f)
-    i = reader.next()
+    i = next(reader)
     rest = [row for row in reader]
 column_headings = i
 
@@ -110,7 +110,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #get_ipython().magic(u'matplotlib inline')
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 
 # In[18]:
@@ -135,9 +135,9 @@ mnb.score(x_test, y_test)
 # In[21]:
 
 
-from sklearn import cross_validation
+from sklearn import model_selection
 print ("cross result========")
-scores = cross_validation.cross_val_score(mnb, x_test, y_test, cv=3)
+scores = model_selection.cross_val_score(mnb, x_test, y_test, cv=3)
 #print (scores)
 #print (scores.mean())
 
@@ -191,9 +191,9 @@ clf_dt=dt.fit(x_train,y_train)
 # In[29]:
 
 
-from sklearn import cross_validation
+from sklearn import model_selection
 #print ("cross result========")
-scores = cross_validation.cross_val_score(dt, x_test, y_test, cv=3)
+scores = model_selection.cross_val_score(dt, x_test, y_test, cv=3)
 #print (scores)
 #print (scores.mean())
 
@@ -275,7 +275,7 @@ import pickle
 
 decision_tree_pkl_filename = 'decision_tree_classifier.pickle'
 # Open the file to save as pkl file
-decision_tree_model_pkl = open(decision_tree_pkl_filename, 'w')
+decision_tree_model_pkl = open(decision_tree_pkl_filename, 'wb')
 pickle.dump(dt, decision_tree_model_pkl)
 # Close the pickle instances
 decision_tree_model_pkl.close()
